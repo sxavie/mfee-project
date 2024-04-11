@@ -1,0 +1,65 @@
+<!--1 Date pipe-->
+<h1 style="color: red;">Date pipe</h1>
+<h2>{{fechaInicio}}</h2>
+<h2>{{fechaInicio | date:'M-d-yyyy'}}</h2>
+
+<!--2 Lower case Pipe-->
+<h1 style="color: red;">Lower case pipe</h1>
+<h2>{{nombre}}</h2>
+<h2>{{nombre | lowercase}}</h2>
+
+<!--3 Upper case Pipe-->
+<h1 style="color: red;">Upper case pipe</h1>
+<h2>{{puesto}}</h2>
+<h2>{{puesto | uppercase}}</h2>
+
+<!--4 Percent Pipe-->
+<h1 style="color: red;">Percent pipe</h1>
+<h2>{{asistencia}}</h2>
+<h2>{{asistencia | percent}}</h2>
+
+<!--5 Decimal Pipe-->
+<h1 style="color: red;">Decimal pipe</h1>
+<h2>{{PI}}</h2>
+<h2>{{PI | number: '1.0-4'}}</h2>
+
+<!--6 Currency Pipe-->
+<h1 style="color: red;">Currency pipe</h1>
+<h2>{{sueldo}}</h2>
+<p>{{sueldo | currency: "JPY"}}</p>
+<p>{{sueldo | currency: "USD"}}</p>
+<p>{{sueldo | currency: "CAD"}}</p>
+<p>{{sueldo | currency: "MXN"}}</p>
+
+<!--7 Slice Pipe-->
+<h1 style="color: red;">Slice pipe</h1>
+<h2>{{nombre}}</h2>
+<p>{{nombre | slice:2:6}}</p>
+
+<!--8 Title case Pipe-->
+<h1 style="color: red;">Title case pipe</h1>
+<h2>{{nombreCompleto}}</h2>
+<p>{{nombreCompleto | titlecase }}</p>
+<p>{{nombreCompleto | titlecase | slice:0:9 }}</p>
+
+<!--9 Json Pipe-->
+<h1 style="color: red;">Json pipe</h1>
+<h2>{{miObjeto}}</h2>
+<h2>{{miObjeto.datos.edad}}</h2>
+<p>{{miObjeto | json}}</p>
+
+<!--10 Custom Pipe-->
+<h1 style="color: red;">Custom pipe</h1>
+<p>{{nombre | empleado: empresa: puesto}}</p>
+
+<!--11 Custom Pipe-->
+<!-- <h1 style="color: red;">Custom pipe 2</h1>
+<p>{{n1 | suma: n2}}</p> -->
+
+<!--12 Custom Pipe-->
+<!-- <h1 style="color: red;">Custom pipe 3</h1>
+<p>{{alumno | empleado2: escuela: grado}}</p> -->
+
+<!--12 Custom Pipe-->
+<!-- <h1 style="color: red;">Custom pipe 3</h1>
+<p>{{miObjeto | mascotas}}</p> -->

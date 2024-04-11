@@ -1,0 +1,117 @@
+<table class="table" style="width: 75%; margin: auto">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Directive</th>
+      <th scope="col" style="width: 40%">Description</th>
+      <th scope="col">Sintaxys</th>
+      <th scope="col">triggers</th>
+      <th scope="col">Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>ngIf</td>
+      <td>La directiva ngIf nos ayuda a visualizar en el DOM algun elemento en base a una condición que tengamos</td>
+      <td>&#60;h3&#62;*ngIf="comparador === true" &#60;/h3&#62;</td>
+      <td>
+        <button (click)="comparar()">cambiar</button>
+      </td>
+      <td>
+        <p>{{ comparador }}</p>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>ngFor</td>
+      <td>
+        La directiva ngFor nos ayuda cuando queremos representar un listado de elementos en el DOM sin la necesidad de colocar cada uno de
+        ellos en la lista.
+      </td>
+      <td>
+        &#60;ul&#62;
+        &#60;li *ngFor="let empleado of empleados"&#62; &#123;&#123;empleado&#125; &#125; &#60;/li&#62;
+          &#60;/ul&#62;
+      </td>
+      <td>NA</td>
+      <td>
+        <ul>
+          <li *ngFor="let empleado of empleados">{{ empleado }}</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>ngStyle</td>
+      <td>
+        La directiva ngFor nos ayuda cuando queremos representar un listado de elementos en el DOM sin la necesidad de colocar cada uno de
+        ellos en la lista.
+      </td>
+      <td>&#60;p&#62; [ngStyle]="&#123; color: customColor, 'font-family': 'Arial' &#125;"&#62; Ejemplo &#60;/p&#62;</td>
+
+      <td>NA</td>
+      <td>
+        <p [ngStyle]="{ color: 'blue', 'font-family': 'Arial' }">Ejemplo</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- 
+<h1 style="color: red; font-weight: bold">Ejemplos de directivas</h1>
+<h2>directiva ngIf</h2>
+<p>La directiva ngIf nos ayuda a visualizar en el DOM algun elemento en base a una condición que tengamos</p>
+
+<button (click)="comparar()">cambiar</button>
+<h3>{{ comparador }}</h3>
+
+<h3 *ngIf="comparador === true">{{ nombre }}</h3>
+
+<h2>directiva ngFor</h2>
+<p>
+  La directiva ngFor nos ayuda cuando queremos representar un listado de elementos en el DOM sin la necesidad de colocar cada uno de ellos
+  en la lista.
+</p>
+<p>Ejemplo:</p>
+
+<ul>
+  <li *ngFor="let empleado of empleados">{{ empleado }}</li>
+</ul>
+
+<h2>directiva ngStyle</h2>
+<p>
+  La directiva ngFor nos ayuda cuando queremos representar un listado de elementos en el DOM sin la necesidad de colocar cada uno de ellos
+  en la lista.
+</p>
+<p>Ejemplo:</p>
+<h3 [ngStyle]="{ color: 'blue', 'font-family': 'Arial' }">Mi Titulo</h3>
+<br />
+<hr /> -->
+
+<h2>directiva ngSwtch</h2>
+<button (click)="cambio_color('azul')">AZUL</button>
+<button (click)="cambio_color('rojo')">ROJO</button>
+<button (click)="cambio_color('verde')">VERDE</button>
+
+<ul [ngSwitch]="colorSeleccionado">
+  <li *ngSwitchCase="'azul'">Color azul</li>
+  <li *ngSwitchCase="'rojo'">Color rojo</li>
+  <li *ngSwitchCase="'verde'">Color verde</li>
+</ul>
+
+<h2>directiva ngClass</h2>
+<h3>{{ claseSeleccionada }}</h3>
+<button (click)="comparar()">cambiar</button>
+<div [ngClass]="claseSeleccionada"></div>
+
+<h2>directiva ngModel</h2>
+<h3>{{ colorTexto }}</h3>
+<input type="text" [(ngModel)]="colorTexto" placeholder="inserte el hex de un color" />
+<button (click)="setColor()">set color</button>
+<div
+  [ngStyle]="{
+    'background-color': colorTexto3,
+    width: '100px',
+    height: '100px'
+  }"
+></div>

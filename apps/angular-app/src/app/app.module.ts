@@ -9,6 +9,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TemplateFormComponent } from './views/template-form/template-form.component';
 import { ReactiveFormComponent } from './views/reactive-form/reactive-form.component';
 import { OperationsFormComponent } from './views/operations-form/operations-form.component';
+import { DirectivesComponent } from './views/directives/directives.component';
+import { PipesComponent } from './views/pipes/pipes.component';
+import { EmpleadoPipe } from './pipes/empleado.pipe';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { OperationsFormComponent } from './views/operations-form/operations-form
     NavBarComponent,
     TemplateFormComponent,
     ReactiveFormComponent,
-    OperationsFormComponent
+    OperationsFormComponent,
+    DirectivesComponent,
+    PipesComponent,
+    EmpleadoPipe
  ],
   imports: [
     CommonModule,

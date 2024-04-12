@@ -1,0 +1,21 @@
+.dialogCointainer{
+    width: 600px;
+    height: 600px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-form-field{
+    width: 530px;
+}
+
+.btnContainer{
+    align-self: flex-end;
+}
+
+.btn{
+    margin: 5px;
+}

@@ -1,0 +1,39 @@
+{
+  "locations": [
+    {
+      "id": 0,
+      "title": "Artículo 1",
+      "description": "Descripción del artículo 1",
+      "category": "Categoría 1",
+      "url": "https://ejemplo.com/articulo1"
+    },
+    {
+      "id": 1,
+      "title": "Artículo 2",
+      "description": "Descripción del artículo 2",
+      "category": "Categoría 2",
+      "url": "https://ejemplo.com/articulo2"
+    },
+    {
+      "id": 2,
+      "title": "Artículo 3",
+      "description": "Descripción del artículo 3",
+      "category": "Categoría 1",
+      "url": "https://ejemplo.com/articulo3"
+    },
+    {
+      "id": 3,
+      "title": "Artículo 4",
+      "description": "Descripción del artículo 44",
+      "category": "Categoría 3",
+      "url": "https://ejemplo.com/articulo4"
+    },
+    {
+      "id": 4,
+      "title": "Artículo 5",
+      "description": "Descripción del artículo 5",
+      "category": "Categoría 2",
+      "url": "https://ejemplo.com/articulo5"
+    }
+  ]
+}

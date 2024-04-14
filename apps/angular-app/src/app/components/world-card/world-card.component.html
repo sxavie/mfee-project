@@ -1,11 +1,9 @@
 
   <div class="image-container">
-    <div class="content">
-      <!-- Contenido del div -->
-      <h3>Título</h3>
-      <p>Comentarios</p>
-      <p>Descripción</p>
-      <p>tipo</p>
+    <div class="content" [style.background-image]="'url(' + imageUrl + ')'">
+      <h3>{{title}}</h3>
+      <p>{{comments}}</p>
+      <p>{{description}}</p>
+      <p>{{imageUrl}}</p>
     </div>
   </div>
-  

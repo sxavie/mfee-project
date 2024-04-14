@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { travel } from '../interfaces/enums';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +14,9 @@ export class HttpComunicationService {
   
   postData(data: unknown): Observable<unknown> {
     return this.http.post<unknown>(this.apiUrl, data);
+  }
+
+  getAllData(): Observable<travel> {
+    return this.http.get<travel>(this.apiUrl)
   }
 }

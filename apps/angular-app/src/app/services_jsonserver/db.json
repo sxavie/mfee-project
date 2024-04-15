@@ -2,10 +2,10 @@
   "locations": [
     {
       "id": 0,
-      "title": "Artículo 1",
-      "description": "Descripción del artículo 1",
+      "title": "Walking with our pets",
+      "description": "walking with our pets its a way to be happy!!!",
       "category": "Lifestyle",
-      "url": "https://ejemplo.com/articulo1"
+      "url": "https://material.angular.io/assets/img/examples/shiba1.jpg"
     },
     {
       "id": 1,

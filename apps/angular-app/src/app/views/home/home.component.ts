@@ -11,4 +11,12 @@ import { WorldCardComponent } from '../../components/world-card/world-card.compo
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {}
+export class HomeComponent {
+  cardData: any;
+  cardDataToChild: any;
+
+  reciveWorldInfoEvent(event: any) {
+    this.cardData = event.mensaje;
+    this.cardDataToChild = event.mensaje
+  }
+}

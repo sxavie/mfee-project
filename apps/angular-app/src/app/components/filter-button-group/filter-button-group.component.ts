@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpComunicationService } from '../../services/http-comunication.service';
 import { map } from 'rxjs';
+import { travel } from '../../interfaces/interfaces';
 
 
 @Component({
@@ -13,8 +14,10 @@ import { map } from 'rxjs';
   templateUrl: './filter-button-group.component.html',
   styleUrl: './filter-button-group.component.scss'
 })
-export class FilterButtonGroupComponent {
+export class FilterButtonGroupComponent implements OnInit{
   titles: any[] = [];
+  @Output() worldInfoEvent = new EventEmitter()
+  travelInfo: travel
 
   constructor(public _http: HttpComunicationService) {}
 
@@ -23,6 +26,10 @@ export class FilterButtonGroupComponent {
   //     console.log(x);
   //   });
   // }
+
+  ngOnInit() {
+    this.sendWorldInfo();
+  }
 
   getAllData() {
     return this._http
@@ -39,7 +46,8 @@ export class FilterButtonGroupComponent {
         )
       )
       .subscribe((x) => {
-        console.log(x);
+        this.travelInfo = x
+        this.sendWorldInfo();
       });
   }
 
@@ -52,7 +60,8 @@ export class FilterButtonGroupComponent {
       )
       )
       .subscribe((x) => {
-        console.log(x);
+        this.travelInfo = x
+        this.sendWorldInfo();
       });
   }
 
@@ -65,7 +74,8 @@ export class FilterButtonGroupComponent {
       )
       )
       .subscribe((x) => {
-        console.log(x);
+        this.travelInfo = x
+        this.sendWorldInfo();
       });
   }
 
@@ -78,7 +88,8 @@ export class FilterButtonGroupComponent {
       )
       )
       .subscribe((x) => {
-        console.log(x);
+        this.travelInfo = x
+        this.sendWorldInfo();
       });
   }
 
@@ -91,7 +102,8 @@ export class FilterButtonGroupComponent {
       )
       )
       .subscribe((x) => {
-        console.log(x);
+        this.travelInfo = x
+        this.sendWorldInfo();
       });
   }
 
@@ -104,7 +116,13 @@ export class FilterButtonGroupComponent {
       )
       )
       .subscribe((x) => {
-        console.log(x);
+        this.travelInfo = x
+        this.sendWorldInfo();
       });
+  }
+
+  sendWorldInfo() {
+    this.worldInfoEvent.emit({ mensaje: this.travelInfo })
+    console.log(this.travelInfo)
   }
 }

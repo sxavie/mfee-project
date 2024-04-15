@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { travel } from '../interfaces/enums';
+import { travel } from '../interfaces/interfaces';
 
 
 @Injectable({

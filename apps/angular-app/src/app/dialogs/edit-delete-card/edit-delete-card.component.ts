@@ -47,6 +47,17 @@ export class EditDeleteCardComponent {
     }
   }
 
+  deleteData(){
+    this._http.deleteData(this.profileForm.value).subscribe(response => {
+      this.toastr.success('your post was deleted correctly', 'SUCCESS');
+      console.log('Recurso eliminado:', response);
+      this.onNoClick()
+    }, error => {
+      this.toastr.error('An error was ocurred while you tried to delete a post', 'ERROR');
+      console.error('Error al eliminar recurso:', error);
+    });
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }

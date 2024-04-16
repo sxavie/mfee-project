@@ -6,11 +6,14 @@ import { HttpComunicationService } from '../../services/http-comunication.servic
 import { HttpClientModule } from '@angular/common/http';
 import { map } from 'rxjs';
 import { travel } from '../../interfaces/interfaces';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { EditDeleteCardComponent } from '../../dialogs/edit-delete-card/edit-delete-card.component';
 
 @Component({
   selector: 'mfee-project-world-card',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, HttpClientModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule, HttpClientModule, MatIconModule],
   providers: [HttpComunicationService],
   templateUrl: './world-card.component.html',
   styleUrl: './world-card.component.scss'
@@ -25,7 +28,7 @@ export class WorldCardComponent implements OnInit {
   @Output() worldInfoEvent = new EventEmitter()
   travelInfo: travel
 
-  constructor(public _http: HttpComunicationService) {}
+  constructor(public _http: HttpComunicationService, public dialog: MatDialog) {}
   ngOnInit() {
     this.title = 'mi primer titulo';
     this.description = 'mi primer description';
@@ -35,6 +38,10 @@ export class WorldCardComponent implements OnInit {
 
   refresh() {
     this.cards = this.travelInfo;
+  }
+
+  openDialog(card) {
+    this.dialog.open(EditDeleteCardComponent ,{ disableClose: true, data: {card} });
   }
 
   getAllData() {

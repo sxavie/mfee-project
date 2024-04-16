@@ -1,10 +1,11 @@
 
-  <button (click)="refresh()" >REFRESH</button>
-  <div class="image-container">
-    <div class="content" [style.background-image]="'url(' + imageUrl + ')'">
-      <h3>{{title}}</h3>
-      <p>{{comments}}</p>
-      <p>{{description}}</p>
-      <p>{{imageUrl}}</p>
-    </div>
+<button class="btn btn-outline-primary" (click)="refresh()">Update Filter</button>
+
+<div class="image-container">
+  <div class="card" [style.background-image]="'url(' + cardData[i].url + ')'" *ngFor="let card of cards; index as i">
+    <h3>{{ cardData[i].title }}</h3>
+    <p>{{ cardData[i].category }}</p>
+    <p>{{ cardData[i].description }}</p>
+    <p>{{ cardData[i].url }}</p>
   </div>
+</div>

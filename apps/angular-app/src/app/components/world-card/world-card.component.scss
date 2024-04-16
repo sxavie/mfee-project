@@ -29,6 +29,13 @@ button {
   align-items: flex-start;
   background-repeat: no-repeat;
   background-size: cover;
+  padding: 20px;
+}
+
+.filterSectionClass{
+  display: flex;
+  margin: auto;
+  width: 500px;
 }
 
 @media only screen and (max-width: 600px) {

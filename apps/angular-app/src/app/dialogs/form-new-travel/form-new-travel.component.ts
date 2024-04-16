@@ -34,7 +34,7 @@ export class FormNewTravelComponent {
   profileForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(5)]),
     description: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    category: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    category: new FormControl('', [Validators.required]),
     url: new FormControl('', [Validators.required, Validators.minLength(5)])
   });
 

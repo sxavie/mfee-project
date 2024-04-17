@@ -20,42 +20,49 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './edit-delete-card.component.scss'
 })
 export class EditDeleteCardComponent {
-  
-  profileForm: FormGroup
-  
+  profileForm: FormGroup;
+  title: string;
 
-  constructor(private toastr: ToastrService, public _http:HttpComunicationService ,public dialogRef: MatDialogRef<HomeComponent>, @Inject(MAT_DIALOG_DATA) public data: any){
-     
-  this.profileForm = new FormGroup({
-    id: new FormControl(data.card.id, []),
-    title: new FormControl(data.card.title, [Validators.required, Validators.minLength(5)]),
-    description: new FormControl(data.card.description, [Validators.required, Validators.minLength(5)]),
-    category: new FormControl('', [Validators.required]),
-    url: new FormControl(data.card.url, [Validators.required, Validators.minLength(5)])
-  });
+  constructor(
+    private toastr: ToastrService,
+    public _http: HttpComunicationService,
+    public dialogRef: MatDialogRef<HomeComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.title = data.name;
+
+    this.profileForm = new FormGroup({
+      id: new FormControl(data.card.id, []),
+      title: new FormControl(data.card.title, [Validators.required, Validators.minLength(5)]),
+      description: new FormControl(data.card.description, [Validators.required, Validators.minLength(5)]),
+      category: new FormControl('', [Validators.required]),
+      url: new FormControl(data.card.url, [Validators.required, Validators.minLength(5)])
+    });
   }
 
   onSave() {
     if (this.profileForm.valid) {
       console.log(this.profileForm.value);
-      this.toastr.success('your post was created correctly', 'SUCCESS');
-      this._http.editData(this.profileForm.value).subscribe()
-      this.onNoClick()
+      this.toastr.success('your post was edited correctly', 'SUCCESS');
+      this._http.editData(this.profileForm.value).subscribe();
+      this.onNoClick();
     } else {
       this.toastr.error('An error was ocurred while you tried to make a post', 'ERROR');
-      console.log(' Algun campo no es valido');
+      console.log(' Error to edit');
     }
   }
 
-  deleteData(){
-    this._http.deleteData(this.profileForm.value).subscribe(response => {
-      this.toastr.success('your post was deleted correctly', 'SUCCESS');
-      console.log('Recurso eliminado:', response);
-      this.onNoClick()
-    }, error => {
-      this.toastr.error('An error was ocurred while you tried to delete a post', 'ERROR');
-      console.error('Error al eliminar recurso:', error);
-    });
+  deleteData() {
+    this._http.deleteData(this.profileForm.value).subscribe(
+      () => {
+        this.toastr.success('your post was deleted correctly', 'SUCCESS');
+        this.onNoClick();
+      },
+      (error) => {
+        this.toastr.error('An error was ocurred while you tried to delete a post', 'ERROR');
+        console.error('Error to delete:', error);
+      }
+    );
   }
 
   onNoClick(): void {

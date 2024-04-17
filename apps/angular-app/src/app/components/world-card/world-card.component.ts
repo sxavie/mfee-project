@@ -40,8 +40,8 @@ export class WorldCardComponent implements OnInit {
     this.cards = this.travelInfo;
   }
 
-  openDialog(card) {
-    this.dialog.open(EditDeleteCardComponent ,{ disableClose: true, data: {card} });
+  openDialog(card, name) {
+    this.dialog.open(EditDeleteCardComponent ,{ disableClose: true, data: {card, name} });
   }
 
   getAllData() {

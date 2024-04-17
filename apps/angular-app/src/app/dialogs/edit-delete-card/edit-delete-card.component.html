@@ -1,5 +1,5 @@
 <div class="dialogCointainer">
-  <h1>Edit/Delete Post</h1>
+  <h1>{{ title }}</h1>
 
   <form action="" [formGroup]="profileForm" (ngSubmit)="onSave()">
     <p>
@@ -38,8 +38,8 @@
     </p>
     <div class="btnContainer">
       <button type="button" class="btn btn-light" (click)="onNoClick()">Cancel</button>
-      <button type="submit" class="btn btn-primary">Edit</button>
-      <button type="button" class="btn btn-danger" (click)="deleteData()">Delete</button>
+      <button type="submit" *ngIf="title === 'Edit'" class="btn btn-primary">Edit</button>
+      <button type="button" *ngIf="title === 'Delete'" class="btn btn-danger" (click)="deleteData()">Delete</button>
     </div>
   </form>
 </div>

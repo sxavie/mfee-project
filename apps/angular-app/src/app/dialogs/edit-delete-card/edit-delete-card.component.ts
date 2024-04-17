@@ -47,7 +47,7 @@ export class EditDeleteCardComponent {
       this._http.editData(this.profileForm.value).subscribe();
       this.onNoClick();
     } else {
-      this.toastr.error('An error was ocurred while you tried to make a post', 'ERROR');
+      this.toastr.error('An error was ocurred while you tried to edit', 'ERROR');
       console.log(' Error to edit');
     }
   }
@@ -59,7 +59,7 @@ export class EditDeleteCardComponent {
         this.onNoClick();
       },
       (error) => {
-        this.toastr.error('An error was ocurred while you tried to delete a post', 'ERROR');
+        this.toastr.error('An error was ocurred while you tried to delete', 'ERROR');
         console.error('Error to delete:', error);
       }
     );

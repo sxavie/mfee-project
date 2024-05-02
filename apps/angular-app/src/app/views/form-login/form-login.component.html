@@ -1,0 +1,20 @@
+<div class="dialogCointainer">
+    <h1>login</h1>
+    <form action="" [formGroup]="userform" (ngSubmit)="onSave()">
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>User</mat-label>
+                <input matInput placeholder="User" type="text" formControlName="user" />
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password" type="password" formControlName="password" />
+            </mat-form-field>
+        </p>
+        <div class="btnContainer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

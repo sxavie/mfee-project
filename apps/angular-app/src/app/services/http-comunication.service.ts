@@ -8,6 +8,7 @@ import { travel } from '../interfaces/interfaces';
 })
 export class HttpComunicationService {
   private apiUrl = 'http://localhost:3000/locations';
+  private apiUsersUrl = 'http://localhost:3001/users';
 
   constructor(private http: HttpClient) {}
 
@@ -26,5 +27,9 @@ export class HttpComunicationService {
 
   getAllData(): Observable<travel> {
     return this.http.get<travel>(this.apiUrl);
+  }
+
+  getUsers(): Observable<any> {
+    return this.http.get<any>(this.apiUsersUrl);
   }
 }

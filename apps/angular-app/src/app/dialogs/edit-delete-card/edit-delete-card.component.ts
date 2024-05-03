@@ -45,7 +45,7 @@ export class EditDeleteCardComponent {
       console.log(this.profileForm.value);
       this.toastr.success('your post was edited correctly', 'SUCCESS');
       this._http.editData(this.profileForm.value).subscribe();
-      this.onNoClick();
+      this.onNoClickRefresh();
     } else {
       this.toastr.error('An error was ocurred while you tried to edit', 'ERROR');
       console.log(' Error to edit');
@@ -56,7 +56,7 @@ export class EditDeleteCardComponent {
     this._http.deleteData(this.profileForm.value).subscribe(
       () => {
         this.toastr.success('your post was deleted correctly', 'SUCCESS');
-        this.onNoClick();
+        this.onNoClickRefresh();
       },
       (error) => {
         this.toastr.error('An error was ocurred while you tried to delete', 'ERROR');
@@ -68,4 +68,12 @@ export class EditDeleteCardComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  onNoClickRefresh(): void {
+    this.dialogRef.close();
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  }
+
 }

@@ -6,15 +6,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpComunicationService } from '../../services/http-comunication.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'mfee-project-form-login',
   standalone: true,
   imports: [CommonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatSelectModule, ReactiveFormsModule, HttpClientModule],
-  providers: [HttpComunicationService],
+  providers: [LoginService],
   templateUrl: './form-login.component.html',
   styleUrl: './form-login.component.scss'
 })
@@ -23,7 +23,7 @@ export class FormLoginComponent implements OnInit{
   title: string;
   usersData: any;
   
-  constructor(private router: Router, private _userService: HttpComunicationService, private _toastr: ToastrService) {
+  constructor(private router: Router, private _userService: LoginService, private _toastr: ToastrService) {
     this.userform = new FormGroup({
       user: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
@@ -53,5 +53,9 @@ export class FormLoginComponent implements OnInit{
     } else {
       this._toastr.error('incorrect credentials or a form file is emplty', 'ERROR');
     }
+  }
+
+  onSignUp() {
+    this.router.navigate(['/sign-up']);
   }
 }

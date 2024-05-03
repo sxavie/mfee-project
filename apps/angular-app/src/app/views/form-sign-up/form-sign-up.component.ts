@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,11 +18,11 @@ import { LoginService } from '../../services/login.service';
   templateUrl: './form-sign-up.component.html',
   styleUrl: './form-sign-up.component.scss'
 })
-export class FormSignUpComponent {
+export class FormSignUpComponent implements OnInit {
   userform: FormGroup;
   title: string;
   usersData: any;
-  
+
   constructor(private router: Router, private _userService: LoginService, private _toastr: ToastrService) {
     this.userform = new FormGroup({
       user: new FormControl('', [Validators.required]),
@@ -32,24 +32,18 @@ export class FormSignUpComponent {
     });
   }
 
-  // ngOnInit() {
-  //   this._userService.getUsers().subscribe(data => {
-  //     this.usersData = data;
-  //     console.log(this.usersData)
-  //   });
-  // }
+  ngOnInit() {
+    this._userService.getUsers().subscribe((data) => {
+      this.usersData = data;
+      console.log(this.usersData);
+    });
+  }
 
   onSave() {
-    console.log(this.userform.value)
+    console.log(this.userform.value);
 
-    // const username = this.userform.value.user;
-    // const email = this.userform.value.email;
     const password = this.userform.value.password;
     const confPassword = this.userform.value.confPassword;
-
-    // const user = this.usersData.find(
-    //   u => u.user === username && u.password === password
-    // );
 
     if (password === confPassword && this.userform.valid) {
       console.log('Inicio de sesión exitoso');
@@ -58,6 +52,16 @@ export class FormSignUpComponent {
       this.userform.reset();
     } else {
       this._toastr.error('password is diferent or a field is emplty', 'ERROR');
+    }
+  }
+
+  compareUser() {
+    const username = this.userform.value.user;
+    const user = this.usersData.find((u) => u.user === username);
+    if (user) {
+      this._toastr.error('duplicated USER', 'ERROR');
+    } else {
+      this.onSave();
     }
   }
 

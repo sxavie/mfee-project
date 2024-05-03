@@ -28,7 +28,9 @@ export class WorldCardComponent implements OnInit {
   @Output() worldInfoEvent = new EventEmitter()
   travelInfo: travel
 
-  constructor(public _http: HttpComunicationService, public dialog: MatDialog) {}
+  constructor(public _http: HttpComunicationService, public dialog: MatDialog) {
+    this.getAllData()
+  }
   ngOnInit() {
     this.title = 'mi primer titulo';
     this.description = 'mi primer description';

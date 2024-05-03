@@ -53,12 +53,12 @@ export class FormSignUpComponent {
 
     if (password === confPassword && this.userform.valid) {
       console.log('Inicio de sesión exitoso');
-      this._userService.postNewUser(this.userform.value).subscribe()
+      this._userService.postNewUser(this.userform.value).subscribe();
       this._toastr.success('new user added', 'SUCCESS');
-      this.router.navigate(['/login']);
+      this.userform.reset();
     } else {
       this._toastr.error('password is diferent or a field is emplty', 'ERROR');
-    } 
+    }
   }
 
   onCancel() {

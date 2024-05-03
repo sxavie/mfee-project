@@ -30,6 +30,13 @@
       "email": "ats@hotmail.com",
       "password": "ats1234",
       "confPassword": "ats1234"
+    },
+    {
+      "id": "959a",
+      "user": "jesus",
+      "email": "jesus@hotmail.com",
+      "password": "ats2024",
+      "confPassword": "ats2024"
     }
   ]
 }

@@ -1,0 +1,33 @@
+<div class="dialogCointainer">
+    <h1>Sign Up</h1>
+    <form action="" [formGroup]="userform" (ngSubmit)="onSave()">
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>user</mat-label>
+                <input matInput placeholder="user" type="text" formControlName="user" />
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="name@email.com" type="email" formControlName="email" />
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password" type="password" formControlName="password" />
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput placeholder="Confirm Password" type="password" formControlName="confPassword" />
+            </mat-form-field>
+        </p>
+        <div class="btnContainer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+    </form>
+</div>

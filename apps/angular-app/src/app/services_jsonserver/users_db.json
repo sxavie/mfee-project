@@ -9,6 +9,27 @@
       "id": "1",
       "user": "ats",
       "password": "ats2024"
+    },
+    {
+      "id": "a329",
+      "user": "Sara",
+      "email": "Sara@hotmail.com",
+      "password": "accenture",
+      "confPassword": "accenture"
+    },
+    {
+      "id": "3f5d",
+      "user": "Alejandro",
+      "email": "alejandro@hotmail.com",
+      "password": "ats2024",
+      "confPassword": "ats2024"
+    },
+    {
+      "id": "f7f3",
+      "user": "ats",
+      "email": "ats@hotmail.com",
+      "password": "ats1234",
+      "confPassword": "ats1234"
     }
   ]
 }

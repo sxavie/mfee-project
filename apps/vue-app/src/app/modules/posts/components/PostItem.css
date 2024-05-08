@@ -1,0 +1,24 @@
+.col-md-12,
+.col-lg-6 {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+.card {
+  border: 0;
+  border-radius: 0;
+}
+.card:hover {
+  cursor: pointer;
+}
+.card-content {
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+  height: 100%;
+}
+.card-img {
+  bottom: 40px;
+}
+.card-buttons {
+  top: 85%;
+}

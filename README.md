@@ -1,17 +1,25 @@
-# MFEE Project
+# Activities Session 01
 
-## Start the app
+## Render PostLayout.vue
 
-To start the development server you can run the following commands:
+1. Existe el componente **/layouts/PostLayout.vue**, debes exportalo y rederizalo en **App.vue**
+   
+## Render PostView.vue component
 
-### `npm run start:angular`
+1. Existe un archivo llamado **PostView.html**, copia y pega su contenido en el template de **PostView.vue**. Elimina el archivo html
+2. Del archivo **PostView.css** copia su contenido y pégalo dentro del style de **PostView.vue**
+3. Elimina el archivo css
+4. Rederiza este componente en **PostLayout.vue**
 
-This will start the angular app, open your browser and navigate to [http://localhost:4200/](http://localhost:4200/).
+## Render Header components
 
-### `npm run start:react`
+1. Copiar y pegar todo el bloque que indica el comentario **Inicio HeaderPosts.vue** hasta **Fin HeaderPosts.vue** dentro del template de **HeaderPost.vue**. Renderizarlo una vez en el mismo lugar donde estaba su bloque de comentarios en **PostView.vue**
+2. Copiar y pegar todo el bloque que indica el comentario **Inicio CategoriesList.vue** hasta **Fin CategoriesList.vue** dentro del template de **CategoriesList.vue** y agregarlo al template del componente creado, renderizarlo una vez dentro de **HeaderPost.vue** en el mismo lugar donde se encontraba su bloque de comentario.
+3. Copiar y pegar todo el bloque del comentario de **Inicio CategoryItem.vue** dentro del template de **Fin CategoryItem.vue**, renderizar este componente dentro de **CategoriesList.vue** en el mismo lugar donde se encontraba su bloque de comentario.
 
-This will start the react app, open your browser and navigate to [http://localhost:4200/](http://localhost:4200/).
+## Render PostItem component
 
-### `npm run start:api`
+1. Copiar y pegar todo el contenido del bloque de comentario **Inicio PostItem.vue** hasta **Fin PostItem.vue** dentro del template de **PostItem.vue**
+2. Existe un archivo llamado **PostItem.css** copia y pegar su contenido en el **<style>** del componente creado en el punto anterior.
+3. Renderizarlo una vez en el mismo lugar donde se encontraba su bloque de código.
 
-This will start the node app, you can run this along with any previous front end app. The API will be running in [http://localhost:3000/](http://localhost:3000/). 

@@ -2,6 +2,7 @@
   <div class="container row mt-5 d-flex flex-column align-items-center">
     <p class="text-center fs-5"><strong> Comments </strong></p>
     <!-- Activity 7: Render components: Render CommentItem from /components folder */ -->
+    <!-- Activity 12: Adding events and props -->
     <div class="alert alert-warning m-3" role="alert">There are not results.</div>
     <!-- Activity 7: Render components: Render NewComment from /components folder */ -->
   </div>

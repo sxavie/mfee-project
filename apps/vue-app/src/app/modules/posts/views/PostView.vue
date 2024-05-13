@@ -1,3 +1,4 @@
+<!--Activity 12: Adding events and props */ -->
 <script>
 export default {
   data() {

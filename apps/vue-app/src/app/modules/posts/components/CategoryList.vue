@@ -22,6 +22,23 @@ export default {
         }
       ]
     };
+  },
+  /* Activity 12: Adding events and props */
+  methods: {
+    buildCategories() {
+      this.categories = [
+        {
+          id: '1',
+          name: 'All'
+        },
+        ...this.categories
+      ];
+
+      this.categories = this.categories.map((category) => ({
+        ...category,
+        active: category.name === 'All'
+      }));
+    }
   }
   /*   Activity 5: Add created hook */
 };

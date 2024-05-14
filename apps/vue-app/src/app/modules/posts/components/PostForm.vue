@@ -46,5 +46,6 @@
 export default {
   /*   Activity 5: Add created hook */
   /*   Activity 6: Add unmounted hook */
+  /*   Activity 16: Forms */
 };
 </script>

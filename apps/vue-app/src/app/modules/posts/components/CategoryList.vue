@@ -43,5 +43,7 @@ export default {
   /*   Activity 5: Add created hook */
 
   /* Activity 13: Reactivity API */
+
+  /* Activity 15: Using axios */
 };
 </script>

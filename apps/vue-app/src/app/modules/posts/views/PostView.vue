@@ -71,5 +71,6 @@ export default {
   /*   Activity 5: Add created hook */
 
   /*   Activity 9: Create computed properties: Create a computed property that validates if posts array has elements */
+  /* Activity 15: Using axios */
 };
 </script>

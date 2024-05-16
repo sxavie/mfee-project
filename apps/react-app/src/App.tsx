@@ -1,28 +1,40 @@
+import { HomePage } from "./components/Page";
+import NavBar from "./components/NavBar";
+import { PostProvider } from "./context";
 import { Grid } from "@mui/material";
 
-import { PostProvider } from "./context"
-import Header from "./components/Header";
-import HomePage from "./components/HomePage";
-import PostPage from "./components/PostPage";
-
 function App() {
+  const page: string = "HomePage";
   return (
-    // Activity 7 - Render SnackbarProvider
+    // ACT 7 - Rneder SnackbarProvider component
     <PostProvider>
+      <>
         <Grid
           container
           id="app"
           direction="column"
           height="100vh"
-          flexWrap="nowrap"
+          wrap="nowrap"
         >
-          <Header />
-          <Grid item flexGrow={1}>
-            <HomePage />
-            <PostPage />
+          <NavBar />
+          <Grid
+            container
+            item
+            wrap="nowrap"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              height: "calc(100vh - 84px)",
+            }}
+          >
+            {page === "HomePage" && <HomePage />}
+            {/* ACT 1 - Render PostPage and CategoriesPage components */}
+            {/* ACT 2 - Move the following content to a new component called LoginPage and render it*/}
+            {/* ACT 4 - Add conditions to render PostPage, LoginPage and CategoriesPage components */}
           </Grid>
         </Grid>
-      </PostProvider>
+      </>
+    </PostProvider>
   );
 }
 

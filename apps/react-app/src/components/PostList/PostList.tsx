@@ -2,24 +2,29 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Grid, IconButton, Typography } from "@mui/material";
 
-import { shorten } from "../../utils/index";
-import { Post } from "../../types";
+import { shorten } from "../../common/utils";
 import {
   CardActions,
   CardContainer,
   CardContent,
   PostCard,
 } from "./PostList.styles";
+import { Category, Post } from "../../types";
+import { PostContext } from "../../context";
+import { useContext } from "react";
 
 interface PostListProps {
   posts: Post[];
+  selectedCategory: Category | null;
   handleOpenForm: (defaultValues?: Post) => void;
 }
 
-function PostList({ posts, handleOpenForm }: PostListProps) {
+function PostList({ posts, selectedCategory, handleOpenForm }: PostListProps) {
+  const { removePost } = useContext(PostContext);
+
   return (
     <Grid container columns={{ md: 12, xs: 12 }}>
-      {posts?.map((post) => (
+      {posts.map((post) => (
         <PostCard
           item
           xs={12}
@@ -29,16 +34,13 @@ function PostList({ posts, handleOpenForm }: PostListProps) {
         >
           <CardContainer>
             <CardContent>
-              <h1>{/* Activity 1 - Render post title */}</h1>
+              <h1>{post.title}</h1>
               <h3>
-                {/* Activity 1 - Render comments length */}
-                {/* Activity 4 - Render the word "Comments" if it contains more than one comment and "Comment" if there is only one */}
-                {" Comment"}
+                {post.comments.length}
+                {post.comments.length > 1 ? " Comments" : " Comment"}
               </h3>
               <h3>{shorten(post.description, 70)}</h3>
-              <Typography variant="overline">
-                {/* Activity 1 - Render post category */}
-              </Typography>
+              <Typography variant="overline">{post.category?.name}</Typography>
             </CardContent>
             <CardActions className="card-actions">
               <IconButton
@@ -50,7 +52,16 @@ function PostList({ posts, handleOpenForm }: PostListProps) {
               >
                 <EditIcon />
               </IconButton>
-              <IconButton color="inherit">
+              <IconButton
+                color="inherit"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  removePost({
+                    postID: post.id,
+                    selectedCategoryID: selectedCategory?.id,
+                  });
+                }}
+              >
                 <DeleteIcon />
               </IconButton>
             </CardActions>

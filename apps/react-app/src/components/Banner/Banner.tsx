@@ -1,18 +1,18 @@
 import Button from "@mui/material/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+
 import { BannerContent, BannerTitle, Container } from "./Banner.styles";
 
+// ACT 3 - Receive postImage and postTitle props
 function Banner() {
   return (
-    <Container
-      // Activity 3 - Replace string with postImage prop
-      image={""}
-    >
+    <Container image={""}>
+      {/* ACT 3 - Send postImage as image prop to Container component */}
       <BannerContent>
         <Button sx={{ color: "white" }} startIcon={<ArrowBackIosIcon />}>
           View Posts
         </Button>
-        <BannerTitle variant="h3">{/* Activity 1 - Render post title */}</BannerTitle>
+        <BannerTitle variant="h3">{/* ACT 1 - Render postTitle */}</BannerTitle>
       </BannerContent>
     </Container>
   );

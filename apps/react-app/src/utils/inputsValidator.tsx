@@ -1,8 +1,3 @@
-export function shorten(str: string, maxLen: number) {
-  if (str.length <= maxLen) return str;
-  return `${str.substr(0, str.lastIndexOf(" ", maxLen))}...`;
-}
-
 function validateUrl(url: string) {
   const re =
     /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
@@ -35,3 +30,5 @@ export const validator = ({ name, value }: { name: string; value: string }) => {
 
   return error;
 };
+
+

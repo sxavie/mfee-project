@@ -6,18 +6,45 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  InputLabel,
   MenuItem,
-  FormControl,
-  Select,
   SelectChangeEvent,
-  FormHelperText,
 } from "@mui/material";
 
-import { Post } from "../../types";
-import { validator } from "../../utils";
+import { NewPost, Post } from "../../types";
+import { validator } from "../../common/utils";
 import { PostContext } from "../../context";
-import { FormInputs } from "../../types";
+import { FormInputs, Inputs } from "../../types";
+
+const inputs: Inputs = [
+  {
+    id: "title-id",
+    name: "title",
+    label: "Title",
+    type: "text",
+  },
+  {
+    id: "description-id",
+    name: "description",
+    label: "Description",
+    type: "text",
+  },
+  {
+    id: "category-label",
+    name: "category",
+    label: "Category",
+    type: "menu",
+    options: [
+      { id: "663fef70d513515319551d1f", name: "Travel" },
+      { id: "663fef70d513515319546d1f", name: "Food" },
+    ],
+  },
+  {
+    id: "url-id",
+    name: "image",
+    label: "URL of the image",
+    type: "url",
+  },
+];
 
 const emptyInputs: FormInputs = {
   title: { value: "", error: "" },
@@ -29,30 +56,20 @@ const emptyInputs: FormInputs = {
 interface FormProps {
   open: boolean;
   post?: Post | null;
-  // categorySelected: string;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedPost: (value: React.SetStateAction<Post | null>) => void;
 }
 
-const Form = ({
-  open,
-  post,
-  // categorySelected,
-  setOpen,
-  setSelectedPost,
-}: FormProps) => {
+const Form = ({ open, post, setOpen, setSelectedPost }: FormProps) => {
   const [formData, setFormData] = React.useState(emptyInputs);
-  const {
-    // getPosts,
-    createOrUpdatePost,
-  } = React.useContext(PostContext);
+  const { createOrUpdatePost } = React.useContext(PostContext);
 
   React.useEffect(() => {
     if (!post) return;
     const existingPost = {
       title: { value: post.title, error: "" },
       description: { value: post.description, error: "" },
-      category: { value: post.category, error: "" },
+      category: { value: post.category?._id || "", error: "" },
       image: { value: post.image, error: "" },
     };
     setFormData(existingPost);
@@ -71,17 +88,18 @@ const Form = ({
     const containError = inputs.map((input) => input.error).some((v) => !!v);
     if (containError) return;
 
-    const newPost: Post = {
-      id: post?.id ?? Math.random().toString(),
+    const newPost: NewPost = {
       title: formData.title.value,
       image: formData.image.value,
       description: formData.description.value,
       category: formData.category.value,
-      comments: post?.comments ?? [],
     };
 
-    createOrUpdatePost({ method: post ? "patch" : "post", newPost });
-    // getPosts(categorySelected);
+    createOrUpdatePost({
+      method: post ? "patch" : "post",
+      newPost,
+      postID: post?.id,
+    });
     handleClose();
   };
 
@@ -123,75 +141,50 @@ const Form = ({
         Create Post
       </DialogTitle>
       <DialogContent>
-        <TextField
-          required
-          fullWidth
-          id="title-id"
-          name="title"
-          label="Title"
-          type="text"
-          variant="standard"
-          margin="dense"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          sx={{ paddingBottom: 2 }}
-          value={formData.title.value}
-          error={!!formData.title.error}
-          helperText={formData.title.error ?? " "}
-        />
-        <TextField
-          required
-          fullWidth
-          id="description-id"
-          name="description"
-          label="Description"
-          type="text"
-          variant="standard"
-          margin="dense"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          sx={{ paddingBottom: 2 }}
-          value={formData.description.value}
-          error={!!formData.description.error}
-          helperText={formData.description.error ?? " "}
-        />
-        <FormControl fullWidth sx={{ paddingBottom: 2 }}>
-          <InputLabel id="demo-simple-select-label">Category</InputLabel>
-          <Select
-            required
-            labelId="category-label"
-            id="category-id"
-            label="Category"
-            name="category"
-            variant="standard"
-            margin="dense"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={formData.category.value}
-            error={!!formData.category.error}
-          >
-            <MenuItem value={"Health"}>Health</MenuItem>
-            <MenuItem value={"Travel"}>Travel</MenuItem>
-            <MenuItem value={"Sports"}>Sports</MenuItem>
-          </Select>
-          <FormHelperText>{formData.category.error}</FormHelperText>
-        </FormControl>
-        <TextField
-          required
-          fullWidth
-          id="url-id"
-          name="image"
-          label="URL of the image"
-          type="url"
-          variant="standard"
-          margin="dense"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          sx={{ paddingBottom: 2 }}
-          value={formData.image.value}
-          error={!!formData.image.error}
-          helperText={formData.image.error ?? " "}
-        />
+        {inputs.map((input, idx) => (
+          <React.Fragment key={idx}>
+            {(input.type === "text" || input.type === "url") && (
+              <TextField
+                required
+                fullWidth
+                id={input.id}
+                name={input.name}
+                label={input.label}
+                type={input.type}
+                variant="outlined"
+                margin="dense"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                sx={{ paddingBottom: 2 }}
+                value={formData[input.name].value}
+                error={!!formData[input.name].error}
+                helperText={formData[input.name].error ?? " "}
+              />
+            )}
+            {input.type === "menu" && (
+              <TextField
+                select
+                required
+                fullWidth
+                sx={{ pb: 2 }}
+                margin="dense"
+                id={input.id}
+                name={input.name}
+                label={input.label}
+                onChange={handleChange}
+                value={`${formData[input.name].value}`}
+                error={!!formData[input.name].error}
+                helperText={formData[input.name].error ?? " "}
+              >
+                {input.options?.map((option, idx) => (
+                  <MenuItem value={option.id ?? option.name} key={idx}>
+                    {option.name}
+                  </MenuItem>
+                ))}
+              </TextField>
+            )}
+          </React.Fragment>
+        ))}
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>

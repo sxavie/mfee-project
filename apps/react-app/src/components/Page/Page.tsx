@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import Header from "../Header";
+import NavBar from "../NavBar";
 
 interface PageProps {
   /**
@@ -14,15 +14,18 @@ interface PageProps {
  */
 export default function Page({ page }: PageProps): React.JSX.Element {
   return (
-    <Grid
-      container
-      id="app"
-      direction="column"
-      height="100vh"
-      flexWrap="nowrap"
-    >
-      <Header />
-      <Grid item flexGrow={1}>
+    <Grid container id="app" direction="column" height="100vh" wrap="nowrap">
+      <NavBar />
+      <Grid
+        container
+        item
+        wrap="nowrap"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: "calc(100vh - 84px)",
+        }}
+      >
         {page}
       </Grid>
     </Grid>

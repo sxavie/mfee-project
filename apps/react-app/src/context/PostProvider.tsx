@@ -1,13 +1,41 @@
-import React, { createContext, useState, useCallback } from "react";
-import { AxiosError, AxiosResponse } from "axios";
+import React, {
+  createContext,
+  useState,
+  // useContext,
+  useCallback,
+} from "react";
 
-import axios from "../api/axios";
-import { Post } from "../types";
+import { NewPost, Post, PostsResponse } from "../types";
+// import { SnackbarContext } from "../context";
+import {
+  createPost,
+  deletePost,
+  getPosts,
+  getPostsByCategory,
+  updatePost,
+} from "../api";
 
 interface PostContextProps {
   posts: Post[] | null;
-  getPosts: (category: string) => void;
-  deletePost: (postId: string) => void;
+  loadingPosts: boolean;
+  addPost: (newPost: NewPost) => void;
+  removePost: ({
+    postID,
+    selectedCategoryID,
+  }: {
+    postID: string;
+    selectedCategoryID?: string;
+  }) => void;
+  getPostList: (selectedCategoryID?: string) => void;
+  updatePostData: ({
+    postID,
+    updatedPost,
+    selectedCategoryID,
+  }: {
+    postID: string;
+    updatedPost: NewPost;
+    selectedCategoryID?: string;
+  }) => void;
 }
 
 interface PostProviderProps {
@@ -15,61 +43,122 @@ interface PostProviderProps {
 }
 
 export const PostContext = createContext<PostContextProps>({
-  posts: [] || null,
-  getPosts: () => {},
-  deletePost: () => {},
+  posts: null,
+  loadingPosts: false,
+  addPost: () => {},
+  removePost: () => {},
+  getPostList: () => {},
+  updatePostData: () => {},
 });
 
 export function PostProvider({
   children,
 }: PostProviderProps): React.JSX.Element {
+  // const createAlert = useContext(SnackbarContext);
   const [posts, setPosts] = useState<Post[] | null>(null);
+  const [loadingPosts, setLoadingPosts] = useState(false);
 
-  const getPosts = useCallback((category: string) => {
-    axios({
-      method: "get",
-      signal: AbortSignal.timeout(5000),
-    })
-      .then((response: AxiosResponse) => {
-        const selectedCategory = response.data.filter(
-          (post: Post) => post.category === category
-        );
-        const newPosts = category === "All" ? response.data : selectedCategory;
-        setPosts(newPosts);
-      })
-      .catch((error: AxiosError) => {
-        // Activity 9 - Use createAlert function to show a notification with error message
-        console.error(`${error}`);
-      });
+  const onLoading = (isLoading: boolean) => {
+    setLoadingPosts(isLoading);
+  };
+
+  const onError = useCallback(() => {
+    // createAlert({
+    //   message: "Something went wrong.",
+    //   severity: "error",
+    // });
   }, []);
 
-  const deletePost = useCallback(
-    (postId: string) => {
-      axios({
-        method: "delete",
-        url: `/${postId}`,
-        signal: AbortSignal.timeout(5000),
-      })
-        .then((response: AxiosResponse) => {
-          if (response.status === 200 || response.status === 201) {
-            getPosts("All");
-            // Activity 9 - Use createAlert function to show a notification with success message
-          }
-        })
-        .catch((error: AxiosError) => {
-          // Activity 9 - Use createAlert function to show a notification with success message
-          console.error(`${error}`);
-        });
+  const getPostList = useCallback(
+    async (selectedCategoryID?: string) => {
+      const onSuccess = async (data: PostsResponse[]) => {
+        const newList = data.map((post) => ({
+          id: post._id,
+          title: post.title,
+          image: post.image,
+          description: post.description,
+          category: post.category,
+          comments: post.comments,
+        }));
+        setPosts(newList);
+      };
+
+      const params = { onSuccess, onError, onLoading };
+      selectedCategoryID
+        ? await getPostsByCategory({ selectedCategoryID, ...params })
+        : await getPosts(params);
     },
-    [getPosts]
+    [onError]
+  );
+
+  const addPost = useCallback(
+    async (newPost: NewPost) => {
+      const onSuccess = async () => {
+        await getPostList();
+        // createAlert({
+        //   message: "Post successfully created.",
+        //   severity: "success",
+        // });
+      };
+
+      await createPost({ newPost, onSuccess, onError, onLoading });
+    },
+    [onError, getPostList]
+  );
+
+  const updatePostData = useCallback(
+    async ({
+      postID,
+      updatedPost,
+      selectedCategoryID,
+    }: {
+      postID: string;
+      updatedPost: NewPost;
+      selectedCategoryID?: string;
+    }) => {
+      const onSuccess = async () => {
+        await getPostList(selectedCategoryID);
+        // createAlert({
+        //   message: "Post successfully updated.",
+        //   severity: "success",
+        // });
+      };
+
+      await updatePost({ postID, updatedPost, onSuccess, onError, onLoading });
+    },
+    [onError, getPostList]
+  );
+
+  const removePost = useCallback(
+    async ({
+      postID,
+      selectedCategoryID,
+    }: {
+      postID: string;
+      selectedCategoryID?: string;
+    }) => {
+      const onSuccess = async () => {
+        await getPostList(selectedCategoryID);
+        // createAlert({
+        //   message: "Post successfully deleted.",
+        //   severity: "success",
+        // });
+      };
+      setLoadingPosts(true);
+      await deletePost({ postID, onSuccess, onError });
+    },
+    [onError, getPostList]
   );
 
   return (
     <PostContext.Provider
       value={{
         posts,
-        getPosts,
-        deletePost,
+        loadingPosts,
+        addPost,
+        removePost,
+        getPostList,
+        updatePostData,
       }}
     >
       {children}

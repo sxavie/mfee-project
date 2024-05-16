@@ -1,2 +1,3 @@
 export { PostProvider, PostContext } from "./PostProvider";
-// Activity 7 - Export SnackbarProvider and SnackbarContext
+export { AuthProvider, AuthContext } from "./AuthProvider";
+// ACT 7 - Export SnackbarProvider component

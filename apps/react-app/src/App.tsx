@@ -1,14 +1,16 @@
 import { RouterProvider } from "react-router-dom";
 
-import Router from "./components/Router";
-import { PostProvider } from "./context";
+import Router from "./Router";
+import { AuthProvider, PostProvider } from "./context";
 
 function App() {
   return (
-    // Activity 7 - Render SnackbarProvider
-    <PostProvider>
-      <RouterProvider router={Router} />
-    </PostProvider>
+    <AuthProvider>
+      {/* ACT 7 - Rneder SnackbarProvider component */}
+      <PostProvider>
+        <RouterProvider router={Router} />
+      </PostProvider>
+    </AuthProvider>
   );
 }
 

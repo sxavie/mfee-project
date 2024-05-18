@@ -3,8 +3,8 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 import { BannerContent, BannerTitle, Container } from "./Banner.styles";
 
-const postImage = ""; // ACT 1 - Put some image URL
-// const postTitle = ""; //ACT 1 -  Write a title
+const postImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Big_Ben%2C_London_%2830977153027%29.jpg/763px-Big_Ben%2C_London_%2830977153027%29.jpg?20181120005805";
+const postTitle = "London - Big Ben";
 
 function Banner() {
   return (
@@ -14,7 +14,7 @@ function Banner() {
           View Posts
         </Button>
         <BannerTitle variant="h3">
-          {/* ACT 1 - Render postTitle */}
+          { postTitle }
         </BannerTitle>
       </BannerContent>
     </Container>

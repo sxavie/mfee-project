@@ -23,10 +23,12 @@ function App() {
           }}
         >
           {page === "HomePage" && <HomePage />}
-          <PostPage />
-          <CategoriesPage />
-          <LoginPage/>
-          {/* ACT 4 - Add conditions to render PostPage, LoginPage and CategoriesPage components */}
+          {/*✅ ACT 1 - Render PostPage and CategoriesPage components  */}
+          {page === "PostPage" && <PostPage />}
+          {page === "CategoriesPage" && <CategoriesPage />}
+          {/*✅ ACT 2 - Move the following content to a new component called LoginPage and render it*/}
+          {page === "LoginPage" && <LoginPage/>}
+          {/*✅ ACT 4 - Add conditions to render PostPage, LoginPage and CategoriesPage components */}
           {/* <PageContainer container>
             Login Page
             <Grid item md={4} xs={4} lg={4}>

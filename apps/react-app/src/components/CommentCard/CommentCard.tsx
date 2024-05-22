@@ -1,28 +1,21 @@
 import { Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-
 import { Container, Content, Author } from "./CommentCard.styles";
+import { CommentResponse } from "../../types";
 
-const comment = {
-  _id: "1",
-  author: "Santiago Hernandez",
-  content: "This is a wonderful place to travel",
-  createdAt: "",
-  updatedAt: "",
-  __v: "",
-};
-// ACT 3 - Receive comment prop
+interface Props {
+  comment: CommentResponse
+}
 
-function CommentCard() {
+//✅ ACT 3 - Receive comment prop
+
+function CommentCard( { comment }: Props ) {
   return (
     <Container item sm={8}>
       <AccountCircleIcon />
       <Content>
-        {/* <Author>{ comment.author }</Author>
-        <Typography>{ comment.content }</Typography> */}
-        {/* TODO */}
-        <Author>{/* ACT 1 - Render comment author */}</Author>
-        <Typography>{/* ACT 1 - Render comment content */}</Typography>
+        <Author>{ comment.author }</Author> {/*✅ ACT 1 - Render comment author */}
+        <Typography>{ comment.content }</Typography> {/*✅ ACT 1 - Render comment content */}
       </Content>
     </Container>
   );

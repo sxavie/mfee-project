@@ -22,15 +22,22 @@
     <div class="col-md-12 bg-gray">
       <div class="container m-5">
         <p class="fs-5">Post Description</p>
-        <!-- Activity 7: Render components: Render CommentList from /components folder */ -->
+        <!--✅ Activity 7: Render components: Render CommentList from /components folder */ -->
+        <CommentList/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
+import CommentList from '../components/CommentList.vue';
+
 export default {
-  /*   Activity 5: Add created hook */
+  name: 'PostDetailView',
+  components: { CommentList },
+  /*✅ Activity 5: Add created hook */
+  created() { }
 };
 </script>
 

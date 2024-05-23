@@ -1,10 +1,10 @@
 <template>
   <div>
-    <!-- Activity 3: Render Header components -->
+    <!--✅ Activity 3: Render Header components -->
     <HeaderPost></HeaderPost>
     <div class="row pt-5">
-      <!-- Activity 4: Render PostItem component -->
-      <PostItem></PostItem>
+      <!--✅ Activity 4: Render PostItem component -->
+      <PostItem v-for="post in posts" :key="post.id"></PostItem>
     </div>
     <div class="alert alert-warning m-3" role="alert">There are not results.</div>
   </div>
@@ -32,7 +32,7 @@ export default {
   components: { HeaderPost, PostItem },
   data() {
     return {
-      /*   Activity 8: Add v-for directive: Use this array to iterate <PostItem> in the template */
+      /*✅ Activity 8: Add v-for directive: Use this array to iterate <PostItem> in the template */
       posts: [
         {
           id: 1,
@@ -96,7 +96,10 @@ export default {
         }
       ]
     };
+  },
+  /*✅ Activity 5: Add created hook */
+  created() {
+
   }
-  /*   Activity 5: Add created hook */
 };
 </script>

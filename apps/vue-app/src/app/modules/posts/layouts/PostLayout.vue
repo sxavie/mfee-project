@@ -1,4 +1,4 @@
-<!-- Activity 2: Render PostView.vue component -->
+<!--✅ Activity 2: Render PostView.vue component -->
 <template>
   <PostView></PostView>
 </template>

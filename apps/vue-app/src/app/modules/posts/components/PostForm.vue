@@ -44,7 +44,9 @@
 
 <script>
 export default {
-  /*   Activity 5: Add created hook */
-  /*   Activity 6: Add unmounted hook */
+  /*✅ Activity 5: Add created hook */
+  created() { },
+  /*✅ Activity 6: Add unmounted hook */
+  unmounted() { },
 };
 </script>

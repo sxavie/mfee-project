@@ -9,3 +9,9 @@
     <button class="btn btn-primary mt-2">Add</button>
   </div>
 </template>
+
+<script>
+  export default {
+    name: 'NewComment'
+  }
+</script>

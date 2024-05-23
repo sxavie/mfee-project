@@ -41,3 +41,22 @@ https://vuelidate-next.netlify.app/
 2. Existe un archivo llamado **PostItem.css** copia y pegar su contenido en el **<style>** del componente creado en el punto anterior.
 3. Renderizarlo una vez en el mismo lugar donde se encontraba su bloque de código.
 
+# Activities Session 02
+
+## Add created hook
+
+1. Añade el hook **created()** en los componentes que indica
+   
+## Add unmounted hook
+
+1. Añade el hook **unmounted()** en el componente que indica
+   
+## Render components
+
+1. Renderiza el componente que indica cada comentario
+
+## Add v-for directive
+
+1. Añade la directiva **v-for** en cada componente que indican los comentarios
+2. Has uso del key
+

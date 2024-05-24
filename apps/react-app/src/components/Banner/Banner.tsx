@@ -1,5 +1,6 @@
 import Button from "@mui/material/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+
 import { BannerContent, BannerTitle, Container } from "./Banner.styles";
 
 //✅ ACT 1 - Put some image URL
@@ -19,6 +20,7 @@ function Banner( { postImage, postTitle }: Props ) {
         <Button sx={{ color: "white" }} startIcon={<ArrowBackIosIcon />}>
           View Posts
         </Button>
+        {/*✅ ACT 1 - Render postTitle */}
         <BannerTitle variant="h3">{ postTitle }</BannerTitle>
       </BannerContent>
     </Container>

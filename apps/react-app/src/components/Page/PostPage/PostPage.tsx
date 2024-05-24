@@ -1,6 +1,11 @@
 import Banner from '../../Banner';
 import Comments from '../../Comments';
-import { Container, BannerContainer, CommentsContainer, DescriptionContainer } from './PostPage.styles';
+import {
+  Container,
+  BannerContainer,
+  CommentsContainer,
+  DescriptionContainer,
+} from "./PostPage.styles";
 
 const post = {
   image:

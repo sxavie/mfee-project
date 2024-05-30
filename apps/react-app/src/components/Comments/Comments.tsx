@@ -15,7 +15,6 @@ function Comments( { comments }: Props ) {
       </Title>
       {/*✅ ACT 1 = Render CommentCard component */}
       {/*✅ ACT 3 - Send one comment (comments[0]) as prop to CommentCard component */}
-      {/* <CommentCard comment={ comments[0] } />  */}
       {/*✅ ACT 5 - Iterate comments to render CommentCard component for each comment */}
       {
         comments.map((comment:CommentResponse) => (
@@ -23,7 +22,7 @@ function Comments( { comments }: Props ) {
         ))
       }
       <FormContainer item sm={8}>
-        Form
+        {/* ACT 8 - Create a form to add comments */}
       </FormContainer>
     </Container>
   );

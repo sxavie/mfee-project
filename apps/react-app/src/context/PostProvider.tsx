@@ -121,16 +121,15 @@ export function PostProvider({
           )
         );
       }
-      //✅ ACT 7 - Use createAlert function to notify the user that the item was successfully deleted
-      createAlert({severity: 'success', message: 'Item was successfully deleted'});
     },
     []
   );
 
   const removePost = useCallback((postID: string) => {
     setServerData((prev) => prev.filter((post: Post) => post.id !== postID));
-    // ACT 7 - Use createAlert function to notify the user that the item was successfully deleted
-  }, []);
+      //✅ ACT 7 - Use createAlert function to notify the user that the item was successfully deleted
+      createAlert({severity: 'success', message: 'Item was successfully deleted'});
+  }, [createAlert]);
 
   useEffect(() => setPosts(serverData), [serverData]);
 

@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  /* Activity 12: Adding events and props */
   name: 'CategoryItem',
   methods: {
     toggleCategoryItem: function () {

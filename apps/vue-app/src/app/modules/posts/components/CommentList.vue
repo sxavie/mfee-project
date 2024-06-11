@@ -8,6 +8,7 @@
     <div v-else class="alert alert-warning m-3" role="alert">There are not results.</div>
     <!--✅ Activity 7: Render components: Render NewComment from /components folder */ -->
     <NewComment/>
+    <!-- Activity 12: Adding events and props -->
   </div>
 </template>
 

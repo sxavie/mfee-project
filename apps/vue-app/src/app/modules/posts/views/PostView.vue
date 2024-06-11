@@ -26,6 +26,7 @@
 }
 </style>
 
+<!--Activity 12: Adding events and props */ -->
 <script>
 import HeaderPost from '../components/HeaderPost.vue';
 import PostItem from '../components/PostItem.vue';

@@ -4,6 +4,7 @@
       <div class="card bg-dark text-white">
         <img src="https://cdn.pixabay.com/photo/2017/02/22/17/06/wave-2089959_960_720.jpg" class="card-img" />
         <div class="card-img-overlay">
+          <!-- Activity 14: Vue router  -->
           <div class="d-flex justify-content-start align-items-center ms-4">
             <i class="fa-solid fa-chevron-left me-2"></i>
             <span>View Posts</span>

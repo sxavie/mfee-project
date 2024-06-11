@@ -6,6 +6,7 @@
     </form>
   </div>
   <div class="col-md-6">
+    <!-- Activity 10: Adding click events */ -->
     <button class="btn btn-primary mt-2">Add</button>
   </div>
 </template>

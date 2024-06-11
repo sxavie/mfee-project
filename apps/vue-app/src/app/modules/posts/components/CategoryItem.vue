@@ -9,3 +9,4 @@
     name: 'CategoryItem'
   }
 </script>
+<!-- Activity 10: Adding click events */ -->

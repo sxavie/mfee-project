@@ -18,8 +18,8 @@
       </div>
       <div class="card-img-overlay card-buttons">
         <div class="d-flex justify-content-end align-items-center ms-4">
-          <i class="fa-solid fa-pen pe-3" data-bs-toggle="modal" data-bs-target="#createPostModal"></i>
-          <i class="fa-solid fa-trash"></i>
+          <i class="fa-solid fa-pen pe-3" @click="editPost" data-bs-toggle="modal" data-bs-target="#createPostModal"></i>
+          <i class="fa-solid fa-trash" @click="removePost"></i>
         </div>
       </div>
     </div>
@@ -29,7 +29,15 @@
 
 <script>
 export default {
-  name: 'PostItem'
+  name: 'PostItem',
+  methods: {
+    editPost: function () {
+      alert('edit post');
+    },
+    removePost: function() {
+      alert('remove post')
+    }
+  }
 };
 </script>
 
@@ -59,4 +67,4 @@ export default {
   top: 85%;
 }
 </style>
-<!-- Activity 10: Adding click events */ -->
+<!--✅ Activity 10: Adding click events */ -->

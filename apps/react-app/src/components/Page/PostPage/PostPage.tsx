@@ -41,6 +41,8 @@ const post = {
 };
 
 function PostPage() {
+  // const postID = "664128a212f505651c18d676"
+  // ACT 9 - Use postID variable to fetch the post data
   return (
     <Container container>
       Post page

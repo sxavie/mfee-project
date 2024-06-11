@@ -1,12 +1,13 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Category } from '../../types';
+import { CategoriesResponse } from '../../types';
 
 interface Props {
-  rows: Category[];
+  rows: CategoriesResponse[];
   headCells: GridColDef[];
 }
 
 export const Table = ({ rows, headCells }: Props) => {
+
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
@@ -18,6 +19,7 @@ export const Table = ({ rows, headCells }: Props) => {
           }
         }}
         pageSizeOptions={[5, 10]}
+        getRowId={(row) => row._id}
       />
     </div>
   );

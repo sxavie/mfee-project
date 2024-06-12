@@ -19,7 +19,7 @@
       <div class="card-img-overlay card-buttons">
         <div class="d-flex justify-content-end align-items-center ms-4">
           <i class="fa-solid fa-pen pe-3" @click="editPost" data-bs-toggle="modal" data-bs-target="#createPostModal"></i>
-          <i class="fa-solid fa-trash" @click="removePost"></i>
+          <i class="fa-solid fa-trash" @click="removePost(this.post.id)"></i>
         </div>
       </div>
     </div>
@@ -28,8 +28,14 @@
 </template>
 
 <script>
+import { store } from '../store/store';
+import { deletePost } from '../helpers/posts.js';
+import showAlert from '../helpers/alerts.js';
+
 export default {
   name: 'PostItem',
+  emits: ['deleteEmitter'],
+  mixins: [ showAlert ],
   props: {
     post: {
       type: Object,
@@ -40,11 +46,13 @@ export default {
     goToPostDetail(id) {
       this.$router.push(`/post-detail/${id}`)
     },
-    editPost: function () {
-      alert('edit post');
+    editPost () {
+      store.setPostEditing(this.post)
     },
-    removePost: function () {
-      alert('remove post');
+    async removePost (id) {
+      await deletePost(id);
+      this.showAlert('success', 'Post Deleted')
+      this.$emit('deleteEmitter')
     }
   },
 
@@ -80,4 +88,4 @@ export default {
 <!--✅ Activity 10: Adding click events */ -->
 <!--✅ Activity 12: Adding events and props */ -->
 <!--✅ Activity 14: Vue router  -->
-<!-- Activity 17: Watcher  -->
+<!--✅ Activity 17: Watcher  -->

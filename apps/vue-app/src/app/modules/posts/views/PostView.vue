@@ -5,7 +5,7 @@
     <div v-if="hasPosts">
       <div class="row pt-5">
         <!--✅ Activity 4: Render PostItem component -->
-        <PostItem v-for="post in postsFiltered" :key="post.id" :post="post"></PostItem>
+        <PostItem v-for="post in postsFiltered" :key="post.id" :post="post" @deleteEmitter="() => refreshPosts()"></PostItem>
       </div>
     </div>
     <div v-else class="alert alert-warning m-3" role="alert">There are not results.</div>
@@ -44,8 +44,16 @@ export default {
   /*✅ Activity 5: Add created hook */
   /*✅ Activity 9: Create computed properties: Create a computed property that validates if posts array has elements */
   async created() {
-    await store.fetchApiPosts();
-    this.posts = store.posts;
+    await this.callApi()
+  },
+  methods: {
+    async refreshPosts() {
+      await this.callApi()
+    },
+    async callApi(){
+      await store.fetchApiPosts();
+      this.posts = store.posts;
+    }
   },
   computed: {
     hasPosts: function () {

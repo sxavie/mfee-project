@@ -34,8 +34,10 @@
 import { useRoute } from 'vue-router';
 import CommentList from '../components/CommentList.vue';
 import { getById, updatePost } from '../helpers/posts.js';
+import showAlert from '../helpers/alerts.js';
 
 export default {
+  mixins: [showAlert],
   name: 'PostDetailView',
   components: { CommentList },
   /*✅ Activity 5: Add created hook */
@@ -71,10 +73,11 @@ export default {
     async addComment(comment) {
       this.post.comments.push(comment);
       await updatePost(this.post)
+      this.showAlert('success', 'New comment added')
     }
   }
   /*✅ Activity 16: Forms */
-  /* Activity 17: Watcher */
+  /*✅ Activity 17: Watcher */
 };
 </script>
 

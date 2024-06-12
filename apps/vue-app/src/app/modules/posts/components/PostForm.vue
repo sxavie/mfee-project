@@ -21,7 +21,7 @@
             <div class="form-group pb-3">
               <label>Category</label>
               <select class="form-select" v-model="formData.categoryId">
-                <option v-for="category in categories" :key="category.id">{{ category.name }}</option>
+                <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
               </select>
               <span v-show="!formData.categoryId" class="form-text text-danger"> Error </span>
             </div>
@@ -43,12 +43,15 @@
 
 <script>
 import { getCategories } from '../helpers/categories.js';
-import { createPost } from '../helpers/posts.js';
+import { createPost, updatePost } from '../helpers/posts.js';
 import { ref } from 'vue';
+import { store } from '../store/store';
+import showAlert from '../helpers/alerts.js';
 
 const btnCloseModal = ref(null);
 
 export default {
+  mixins: [ showAlert ],
   /*✅ Activity 5: Add created hook */
   created() {
     this.getCategories();
@@ -59,11 +62,19 @@ export default {
     },
     async createPost() {
       const { title, description, categoryId, image } = this.formData;
-      if (title != '' && description != '' && categoryId != '' && image) {
-        this.formData.id = Math.random().toString(16).slice(2);
-        const categoryFound = this.categories.filter((category) => category.name == categoryId);
+      if (title != '' && description != '' && image) {
+        const categoryFound = this.categories.filter((category) => category.id == categoryId);
         this.formData.category = categoryFound[0];
-        await createPost(this.formData);
+
+        if(this.action === 'Edit'){
+          await updatePost(this.formData)
+          this.showAlert('success', 'Post Updated')
+        } else {
+          this.formData.id = Math.random().toString(16).slice(2);
+          await createPost(this.formData);
+          this.showAlert('success', 'Post Created')
+        }
+
         this.resetFormData();
         this.$refs.btnCloseModal.click();
       }
@@ -78,10 +89,20 @@ export default {
         image: '',
         comments: []
       };
+      this.action = 'Create',
+      store.setPostEditing(null);
+    }
+  },
+  computed: {
+    watchme: function() {
+      return store.postEditing
     }
   },
   /*✅ Activity 6: Add unmounted hook */
-  unmounted() {},
+  unmounted() {
+    this.store.setPostEditing(null)
+  },
+  mounted() {},
   data() {
     return {
       btnCloseModal,
@@ -94,10 +115,19 @@ export default {
         category: {},
         categoryId: '',
         image: '',
-        comments: ''
+        comments: []
       }
     };
-  }
+  },
   /*✅ Activity 16: Forms */
+  watch: {
+    watchme(newValue, oldValue) {
+      if (newValue) {
+        this.action = "Edit";
+        this.formData = newValue;
+        this.formData.categoryId = newValue.category.id;
+      }
+    }
+  }
 };
 </script>

@@ -1,5 +1,5 @@
-/* Activity 18: Mixin  */
-export const alerts = {
+/*✅ Activity 18: Mixin  */
+export default {
   methods: {
     showAlert(icon, title) {
       this.$swal({

@@ -204,17 +204,53 @@ https://vuelidate-next.netlify.app/
      - ✅ Crea un nuevo método que se encargue de hacer un reset de tu objecto local y las validaciones de tu form, manda a llamar ese método con el evento click la x del modal y en el botón close
 
 2. **NewComment.vue**:
-     - Has uso de **v-model**
-     - Valida el input con que sea requerido
-     - Sino es válido muestra los errores, si es válido has un emit del nuevo commentario
-     - Vuelve a setear el comment en null y has un reset del input
+     - ✅ Has uso de **v-model**
+     - ✅ Valida el input con que sea requerido
+     - ✅ Sino es válido muestra los errores, si es válido has un emit del nuevo commentario
+     - ✅ Vuelve a setear el comment en null y has un reset del input
   
 3. **CommentsLists.vue**:
-     - Escuha el emit de **NewComment.vue** y has un emit de ese mismo comentario
-     - Crea una nueva prop llamada **comments** que sea Array y requerida, elimina tu varible de data **comments**
+     - ✅ Escuha el emit de **NewComment.vue** y has un emit de ese mismo comentario
+     - ✅ Crea una nueva prop llamada **comments** que sea Array y requerida, elimina tu varible de data **comments**
   
 4. **PostDetailView.vue**:
-     - Crea un método que haga uso de **getPostById(id)** y mandalo a llamar en el **mounted()**, guarda el resultado en una varible local llamada **post**
-     - Has uso de **data bindind** y **text interpolation** para mostrar los datos de post en la vista (image, title, description), enviale los **comments** del post a **NewComment.vue** 
-     - Escucha el emit de **CommentsList.vue** y has uso de la función para actualizar un post (**updatePost(post)**) para agreagar el comentario nuevo
-     - Valida que puedas añadir un comentario nuevo, 
+     - ✅ Crea un método que haga uso de **getPostById(id)** y mandalo a llamar en el **mounted()**, guarda el resultado en una varible local llamada **post**
+     - ✅ Has uso de **data bindind** y **text interpolation** para mostrar los datos de post en la vista (image, title, description), enviale los **comments** del post a **NewComment.vue** 
+     - ✅ Escucha el emit de **CommentsList.vue** y has uso de la función para actualizar un post (**updatePost(post)**) para agreagar el comentario nuevo
+     - ✅ Valida que puedas añadir un comentario nuevo, 
+
+
+# Activities Session 06
+
+1. **Notas**: 
+    - ✅ Copiar y pegar en tu rama  **helpers/alerts.js**
+    - ✅ Importa vue sweet alert en el main.ts, https://www.npmjs.com/package/vue-sweetalert2
+  
+## Watcher
+
+1. **store.js**:
+     - ✅ Agrega un nuevo atributo al store que se llame **postEditing: null**, este atributo servira para guardar un objecto del post que se este actualizando
+     - ✅ Agrega su función para actualizarlo **setPostEditing(post)**
+  
+2. **PostItem.vue**:
+     - ✅ En el método **editPost()**, manda a llamar **setPostEditing(post)** del store y enviale **this.post**
+  
+3. **PostForm.vue**:
+     -  ✅ Agrega un **watch** que espie la variable **postEditing** del store (has uso de **dot-delimited**), para que valides si el usario esta validando o creando uno nuevo
+     -  ✅ Setea tu variable **this.action = "Edit"** si **postEditing** tiene un valor o **this.action = "Create"** si no tiene ningún valor
+     -  ✅ Si esta editando, llena tu modelo **this.post** con el valor del **postEditing** del store
+     -  ✅ Setea en null postEditing del store en el **unmounted()**
+     -  ✅ Agrega las validaciones necesarias para crear o actualizar el post al dar click en save del modal
+  
+3. **PostItem.vue**:
+     -  ✅ Agrega la opción de eliminar el post en el método **deletePost()**
+     -  ✅ Has uso de sweet alert para mostrar una alerta de confirmación para eliminar el post.
+       
+## Mixin
+
+1. ✅ Has uso de este mixin para usar un sweet alert al crear/actualizar post, eliminar post y agregar un comentario. Esto es para mostrar un mensaje de success o error al ejecutar x acción.
+
+
+## Fin del proyecto
+
+Valida que el proyecto funcione correctamen

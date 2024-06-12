@@ -110,5 +110,6 @@ export default {
       return this.posts.length > 0;
     }
   }
+  /* Activity 15: Using axios */
 };
 </script>

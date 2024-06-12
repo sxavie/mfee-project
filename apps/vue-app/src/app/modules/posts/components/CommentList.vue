@@ -32,5 +32,6 @@ export default {
       return this.comments.length > 0
     }
   }
+  /*   Activity 16: Forms */
 };
 </script>

@@ -1,0 +1,20 @@
+{
+  "categories": [
+    {
+      "id": "2",
+      "name": "Travel"
+    },
+    {
+      "id": "3",
+      "name": "Lifecycle"
+    },
+    {
+      "id": "4",
+      "name": "Business"
+    },
+    {
+      "id": "5",
+      "name": "Work"
+    }
+  ]
+}

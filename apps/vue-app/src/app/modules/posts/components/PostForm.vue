@@ -48,5 +48,6 @@ export default {
   created() { },
   /*✅ Activity 6: Add unmounted hook */
   unmounted() { },
+  /*   Activity 16: Forms */
 };
 </script>

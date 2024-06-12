@@ -3,7 +3,7 @@
     <p class="text-center fs-5"><strong> Comments </strong></p>
     <!--✅ Activity 7: Render components: Render CommentItem from /components folder */ -->
     <CommentItem v-for="comment in comments" :key="comment" :comment="comment" />
-    <!-- <div v-show="!hasComments" class="alert alert-warning m-3" role="alert">There are not results.</div> -->
+    <div v-show="!hasComments" class="alert alert-warning m-3" role="alert">There are not results.</div>
     <!--✅ Activity 7: Render components: Render NewComment from /components folder */ -->
     <NewComment @newCommentEmmiter="(comment) => commentListEmitterListener(comment)" />
   </div>

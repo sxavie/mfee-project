@@ -5,11 +5,12 @@
     <div v-if="hasPosts">
       <div class="row pt-5">
         <!--✅ Activity 4: Render PostItem component -->
-        <PostItem v-for="post in posts" :key="post.id"></PostItem>
+        <PostItem v-for="post in posts" :key="post.id" :post="post"></PostItem>
       </div>
     </div>
     <div v-else class="alert alert-warning m-3" role="alert">There are not results.</div>
   </div>
+  <!-- <PostDetailView /> -->
 </template>
 
 <style>
@@ -26,10 +27,11 @@
 }
 </style>
 
-<!--Activity 12: Adding events and props */ -->
+<!--✅ Activity 12: Adding events and props */ -->
 <script>
 import HeaderPost from '../components/HeaderPost.vue';
 import PostItem from '../components/PostItem.vue';
+
 export default {
   name: 'PostView',
   components: { HeaderPost, PostItem },

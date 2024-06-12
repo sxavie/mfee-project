@@ -3,12 +3,12 @@
     <p class="text-center fs-5"><strong> Comments </strong></p>
     <div v-if="hasComments">
       <!--✅ Activity 7: Render components: Render CommentItem from /components folder */ -->
-      <CommentItem v-for="comment in comments" :key="comment" />
+      <!--✅ Activity 12: Adding events and props -->
+      <CommentItem v-for="comment in comments" :key="comment" :comment="comment" />
     </div>
     <div v-else class="alert alert-warning m-3" role="alert">There are not results.</div>
     <!--✅ Activity 7: Render components: Render NewComment from /components folder */ -->
     <NewComment/>
-    <!-- Activity 12: Adding events and props -->
   </div>
 </template>
 

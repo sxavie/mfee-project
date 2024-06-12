@@ -1,14 +1,16 @@
 <template>
-  <PostLayout></PostLayout>
+  <!-- <PostLayout></PostLayout> -->
   <!--✅ Activity 1: Render PostLayout.vue  -->
 
 
-  <!-- Activity 14: Vue router  -->
+  <!--✅ Activity 14: Vue router  -->
+  <RouterView/>
 </template>
 
 <script>
-  import PostLayout from './modules/posts/layouts/PostLayout.vue'
+  // import {RouterView}  from 'vue-router';
+  // import PostLayout from './modules/posts/layouts/PostLayout.vue'
   export default {
-    components: { PostLayout }
+    // components: { PostLayout }
   }
 </script>

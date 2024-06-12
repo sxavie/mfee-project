@@ -1,7 +1,7 @@
 <template>
   <!-- Inicio CategoriesList.vue -->
   <div class="btn-group" role="group">
-    <CategoryItem v-for="category in categories" :key="category.id" />
+    <CategoryItem v-for="category in categories" :key="category.id" :category="category" />
   </div>
 </template>
 
@@ -34,8 +34,10 @@ export default {
     }
   },
   /*✅ Activity 5: Add created hook */
-  created() {},
-  /* Activity 12: Adding events and props */
+  created() {
+    this.buildCategories();
+  },
+  /*✅ Activity 12: Adding events and props */
   methods: {
     buildCategories() {
       this.categories = [

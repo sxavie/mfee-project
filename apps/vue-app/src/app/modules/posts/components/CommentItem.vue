@@ -3,8 +3,7 @@
     <div class="card-body">
       <h5 class="card-title"><i class="fa-solid fa-user me-1"></i> Name</h5>
       <p class="card-text ps-4">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel magna justo. Suspendisse potenti. Vivamus congue lectus vitae
-        ultrices volutpat. Suspendisse potenti
+        {{ comment }}
       </p>
     </div>
   </div>
@@ -12,8 +11,9 @@
 
 <script>
 export default {
-  name: 'CommentItem'
+  name: 'CommentItem',
+  props: ['comment']
 
-  /* Activity 12: Adding events and props */
+  /*✅ Activity 12: Adding events and props */
 };
 </script>

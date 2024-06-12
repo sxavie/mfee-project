@@ -3,8 +3,8 @@
   <div class="col-md-12 col-lg-6">
     <div class="card bg-dark text-white">
       <img :src="this.post.image" class="card-img" />
-      <div class="card-img-overlay mt-3 ms-3 card-img">
-        <div class="card-content" @click="showPost(post.id)">
+      <div class="card-img-overlay mt-3 ms-3 card-img" @click="goToPostDetail(post.id)">
+        <div class="card-content">
           <h1 class="display-5"> {{ this.post.title }}  </h1>
           <p class="card-text fs-5">
             <em> {{ this.post.comments.length }} comments </em>
@@ -30,10 +30,15 @@
 <script>
 export default {
   name: 'PostItem',
-  props: ['post'],
+  props: {
+    post: {
+      type: Object,
+      required: true
+    }
+  },
   methods: {
-    showPost(id) {
-      this.$router.push(`/post/${id}`)
+    goToPostDetail(id) {
+      this.$router.push(`/post-detail/${id}`)
     },
     editPost: function () {
       alert('edit post');

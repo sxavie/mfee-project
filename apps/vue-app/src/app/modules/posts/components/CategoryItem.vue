@@ -1,6 +1,8 @@
 <template>
   <!-- Inicio CategoryItem.vue -->
-  <button type="button" class="btn btn-light" @click="toggleCategoryItem">{{ categoryName }}</button>
+  <button type="button" class="btn btn-light" @click="selectCategory(category.id)" v-bind:class="{ active: category.active }">
+    {{ category.name }}
+  </button>
   <!-- Fin CategoryItem.vue -->
 </template>
 
@@ -8,17 +10,18 @@
 export default {
   /*✅ Activity 12: Adding events and props */
   name: 'CategoryItem',
-  props: ['category'],
-  methods: {
-    toggleCategoryItem: function () {
-      alert('click category item ', this.categoryName );
+  props: {
+    category: {
+      type: Object,
+      required: true
     }
   },
-  computed: {
-    categoryName: function () {
-      return this.category.name;
+  methods: {
+    selectCategory(id) {
+      this.$emit('selectCategory', id);
     }
-  }
+  },
+  computed: {}
 };
 </script>
 <!--✅ Activity 10: Adding click events */ -->

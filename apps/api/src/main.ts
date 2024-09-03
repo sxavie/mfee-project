@@ -1,11 +1,11 @@
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
-// import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 import { corsOptions } from './config/corsConfig';
-// import { verifyToken } from './middleware/auth';
-// import { errorHandler } from './middleware/errorHandler';
+import { verifyToken } from './middleware/auth';
+import { errorHandler } from './middleware/errorHandler';
 import auth from './routes/auth';
 import categories from './routes/categories';
 import posts from './routes/posts';
@@ -21,25 +21,21 @@ app.use(cors(corsOptions));
 
 app.use('/api/auth', auth);
 
-// app.use(verifyToken);
+app.use(verifyToken);
 app.use('/api/categories', categories);
 app.use('/api/posts', posts);
 
-// app.use(errorHandler);
+app.use(errorHandler);
 
-app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
-});
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    console.log('Connected to MongoDB');
 
-// mongoose
-//   .connect(process.env.MONGO_URL)
-//   .then(() => {
-//     console.log('Connected to MongoDB');
-
-//     app.listen(port, host, () => {
-//       console.log(`[ ready ] http://${host}:${port}`);
-//     });
-//   })
-//   .catch((e) => {
-//     console.error(e);
-//   });
+    app.listen(port, host, () => {
+      console.log(`[ ready ] http://${host}:${port}`);
+    });
+  })
+  .catch((e) => {
+    console.error(e);
+  });

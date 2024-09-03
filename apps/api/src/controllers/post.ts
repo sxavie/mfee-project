@@ -1,11 +1,10 @@
-import { Post } from '../models/post';
-import { Comment } from '../models/comment';
-
-const posts: Array<Post> = [];
-// const comments: Array<Comment> = [];
+import mongoose from 'mongoose';
+import Post from '../models/post';
+import Comment from '../models/comment';
 
 const getPosts = async (req, res) => {
   try {
+    const posts = await Post.find().populate(['category', 'comments']).exec();
     // Return an array of all the posts with status code 200
     res.status(200).json(posts);
   } catch (error) {
@@ -14,20 +13,25 @@ const getPosts = async (req, res) => {
 };
 
 const getPostsByCategoryId = async (req, res) => {
+  const { category } = req.params;
   try {
-    const { category } = req.params;
-    const filterByCategory = posts.filter((p) => p.category === category);
+    if (!isaValidMongooId(category)) res.status(404).json({ message: 'Invalid ID' });
+
+    const posts = await Post.find({ category: category });
+
     // Return an array of all the posts by category with status code 200
-    res.status(200).json(filterByCategory);
+    res.status(200).json(posts);
   } catch (error) {
     errorHandler(error, res);
   }
 };
 
 const getPostById = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
-    const post = posts.find((p) => p.id === id);
+    if (!isaValidMongooId(id)) res.status(404).json({ message: 'Invalid ID' });
+
+    const post = await Post.findById(id);
     if (!post) return res.status(404).json({ message: 'Post not found' });
     // Return a post by id with category object and each comment object
     // in the array with status code 200
@@ -38,75 +42,75 @@ const getPostById = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  const { title, image, description, category } = req.body;
-
-  if (!title || !image || !description || !category) return res.status(400).json({ message: 'Fields required ' });
-
-  const newPost: Post = {
-    id: Date.now().toString(),
-    title,
-    image,
-    description,
-    category,
-    comments: []
-  };
-
-  posts.push(newPost);
-
-  // Create a new post and return the created post with status code 201
-  return res.status(201).json({ newPost });
+  try {
+    const post = await Post.create(req.body);
+    // Create a new post and return the created post with status code 201
+    return res.status(201).json(post);
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
 
 const addComment = async (req, res) => {
-  const { author, content } = req.body;
   const { id } = req.params;
+  try {
+    const comment = await Comment.create(req.body);
 
-  if (!author || !content) return res.status(400).json({ message: 'author and content are required' });
+    const post = await Post.findByIdAndUpdate(
+      id,
+      {
+        $push: { comments: comment.id }
+      },
+      { new: true }
+    );
 
-  const post = posts.find((p: Post) => p.id === id);
-  if (!post) return res.status(404).json({ message: 'Post not found' });
-
-  const newComment: Comment = {
-    id: `cm-${Date.now().toString()}`,
-    author,
-    content
-  };
-  post.comments.push(newComment.id);
-
-  // Create a comment inside the post and return the comment with status code 201
-  return res.status(201).json({
-    comment: newComment
-    // post
-  });
+    // Create a comment inside the post and return the comment with status code 201
+    return res.status(201).json({
+      comment,
+      post
+    });
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
 
 const updatePostTitle = async (req, res) => {
-  const { title } = req.body;
   const { id } = req.params;
 
-  if (!title) return res.status(400).json({ message: 'Title is required' });
-
-  const post = posts.find((p: Post) => p.id === id);
-  if (!post) return res.status(404).json({ message: 'Post not found' });
-
-  post.title = title;
-
-  // Update post information and return the updated post with status code 200
-  return res.status(200).json({ post });
+  try {
+    const post = await Post.findByIdAndUpdate(
+      id,
+      {
+        title: req.body.title
+      },
+      { new: true }
+    );
+    //   // Update post information and return the updated post with status code 200
+    return res.status(200).json(post);
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
 
 const deletePost = async (req, res) => {
   const { id } = req.params;
+  try {
+    if (!isaValidMongooId(id)) return res.status(401).json({ message: 'Invalid ID' });
 
-  const index = posts.findIndex((p: Post) => p.id === id);
+    const post = await Post.findById(id);
 
-  if (index === -1) return res.status(404).json({ message: 'Post not found' });
+    if (!post) return res.status(404).json({ message: 'Post not found' });
 
-  posts.splice(index, 1);
+    await Post.findByIdAndDelete(id);
 
-  // Delete the post and return the deleted post with status code 200 or 204
-  // if you decide to not return anything
-  res.status(204).send();
+    await Comment.deleteMany({ _id: { $in: post.comments }})
+
+    // Delete the post and return the deleted post with status code 200 or 204
+    // if you decide to not return anything
+    res.status(200).send(post);
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
 
 // * *Add 404 validation where needed*
@@ -114,6 +118,10 @@ const deletePost = async (req, res) => {
 const errorHandler = (error, response) => {
   const { message } = error;
   response.status(500).json({ message });
+};
+
+const isaValidMongooId = (id) => {
+  return mongoose.Types.ObjectId.isValid(id);
 };
 
 export default {
